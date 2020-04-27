@@ -19,30 +19,46 @@ public class ShadowContentProviderOperation {
   @RealObject
   private ContentProviderOperation realOperation;
 
-  @HiddenApi @Implementation
+  /** @deprecated implementation detail - use public Android APIs instead */
+  @HiddenApi
+  @Implementation
+  @Deprecated
   public int getType() {
     return getFieldReflectively("mType", Integer.class);
   }
 
+  /** @deprecated implementation detail - use public Android APIs instead */
+  @Deprecated
   public String getSelection() {
     return getFieldReflectively("mSelection", String.class);
   }
+
+  /** @deprecated implementation detail - use public Android APIs instead */
+  @Deprecated
   public String[] getSelectionArgs() {
     return getFieldReflectively("mSelectionArgs", String[].class);
   }
 
+  /** @deprecated implementation detail - use public Android APIs instead */
+  @Deprecated
   public ContentValues getContentValues() {
     return getFieldReflectively("mValues", ContentValues.class);
   }
 
+  /** @deprecated implementation detail - use public Android APIs instead */
+  @Deprecated
   public Integer getExpectedCount() {
     return getFieldReflectively("mExpectedCount", Integer.class);
   }
 
+  /** @deprecated implementation detail - use public Android APIs instead */
+  @Deprecated
   public ContentValues getValuesBackReferences() {
     return getFieldReflectively("mValuesBackReferences", ContentValues.class);
   }
 
+  /** @deprecated implementation detail - use public Android APIs instead */
+  @Deprecated
   @SuppressWarnings("unchecked")
   public Map<Integer, Integer> getSelectionArgsBackReferences() {
     return getFieldReflectively("mSelectionArgsBackReferences", Map.class);

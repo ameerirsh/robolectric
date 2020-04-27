@@ -23,7 +23,7 @@ import org.robolectric.shadow.api.Shadow;
  */
 @Implements(value = MemoryMappedFile.class, isInAndroidSdk = false)
 public class ShadowMemoryMappedFile {
-    private byte[] bytes;
+  protected byte[] bytes;
     private static final String TZ_DATA_1 = "/misc/zoneinfo/tzdata";
     private static final String TZ_DATA_2 = "/usr/share/zoneinfo/tzdata";
     private static final String TZ_DATA_3 = "/misc/zoneinfo/current/tzdata";
@@ -55,7 +55,7 @@ public class ShadowMemoryMappedFile {
             return ErrnoException.class;
         } else {
             try {
-                return MemoryMappedFile.class.getClassLoader().loadClass("libcore.io.ErrnoException");
+        return MemoryMappedFile.class.getClassLoader().loadClass("libcore.io.ErrnoException");
             } catch (ClassNotFoundException e) {
                 throw new RuntimeException(e);
             }
@@ -77,7 +77,7 @@ public class ShadowMemoryMappedFile {
         return getHeapBufferIterator(ByteOrder.LITTLE_ENDIAN);
     }
 
-    private BufferIterator getHeapBufferIterator(ByteOrder endianness) {
+  protected BufferIterator getHeapBufferIterator(ByteOrder endianness) {
         return new RoboBufferIterator(bytes, endianness);
     }
 
@@ -87,8 +87,8 @@ public class ShadowMemoryMappedFile {
         return bytes.length;
     }
 
-    private static class RoboBufferIterator extends BufferIterator {
-        private final ByteBuffer buffer;
+  protected static class RoboBufferIterator extends BufferIterator {
+    protected final ByteBuffer buffer;
 
         public RoboBufferIterator(byte[] buffer, ByteOrder order) {
             this.buffer = ByteBuffer.wrap(buffer);
