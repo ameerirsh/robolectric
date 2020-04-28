@@ -63,6 +63,15 @@ public class ShadowPaintTest {
   }
 
   @Test
+  public void shouldSetUnderlineText() {
+    Paint paint = new Paint();
+    paint.setUnderlineText(true);
+    assertThat(paint.isUnderlineText()).isTrue();
+    paint.setUnderlineText(false);
+    assertThat(paint.isUnderlineText()).isFalse();
+  }
+
+  @Test
   public void measureTextActuallyMeasuresLength() throws Exception {
     Paint paint = Shadow.newInstanceOf(Paint.class);
     assertThat(paint.measureText("Hello")).isEqualTo(5.0f);
@@ -74,5 +83,17 @@ public class ShadowPaintTest {
   public void createPaintFromPaint() throws Exception {
     Paint origPaint = new Paint();
     assertThat(new Paint(origPaint).getTextLocale()).isSameInstanceAs(origPaint.getTextLocale());
+  }
+
+  @Test
+  public void breakTextReturnsNonZeroResult() throws Exception {
+    Paint paint = new Paint();
+    assertThat(
+            paint.breakText(
+                "Hello World",
+                /*measureForwards=*/ true,
+                /*maxWidth=*/ 100,
+                /*measuredWidth=*/ null))
+        .isGreaterThan(0);
   }
 }

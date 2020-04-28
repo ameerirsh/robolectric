@@ -92,6 +92,15 @@ public class ShadowPaint {
   }
 
   @Implementation
+  protected void setUnderlineText(boolean underlineText) {
+    if (underlineText) {
+      setFlags(flags | Paint.UNDERLINE_TEXT_FLAG);
+    } else {
+      setFlags(flags & ~Paint.UNDERLINE_TEXT_FLAG);
+    }
+  }
+
+  @Implementation
   protected Shader setShader(Shader shader) {
     this.shader = shader;
     return shader;
@@ -301,6 +310,38 @@ public class ShadowPaint {
   @Implementation
   protected float measureText(char[] text, int index, int count) {
     return count;
+  }
+
+  @Implementation
+  protected int breakText(
+      char[] text, int index, int count, float maxWidth, float[] measuredWidth) {
+    if (measuredWidth != null) {
+      measuredWidth[0] = maxWidth;
+    }
+    return text.length;
+  }
+
+  @Implementation
+  protected int breakText(
+      String text, boolean measureForwards, float maxWidth, float[] measuredWidth) {
+    if (measuredWidth != null) {
+      measuredWidth[0] = maxWidth;
+    }
+    return text.length();
+  }
+
+  @Implementation
+  protected int breakText(
+      CharSequence text,
+      int start,
+      int end,
+      boolean measureForwards,
+      float maxWidth,
+      float[] measuredWidth) {
+    if (measuredWidth != null) {
+      measuredWidth[0] = maxWidth;
+    }
+    return text.length();
   }
 
   @Implementation(minSdk = P)
